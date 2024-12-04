@@ -1,0 +1,56 @@
+# macOS-specific files
+.DS_Store
+
+# VSCode settings
+.vscode/
+
+# Web / General - dist, build, and temp folders
+dist/
+build/
+out/
+public/
+
+# npm log files
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# iOS / Xcode
+# Build generated
+build/
+DerivedData/
+.idea/
+*.xcuserstate
+*.xccheckout
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# iOS / Xcode - Pods (CocoaPods)
+Pods/
+
+# Carthage - iOS Dependency Manager
+Carthage/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# Xcode IDE config files
+*.xcuserstate
+*.xcodeproj/project.xcuserdata
+*.xcworkspace/xcuserdata/
+
+# Web / Node.js
+# Node.js
+node_modules/
+
+
+
+# Flutter specific
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.flutter-logs/
+
+
