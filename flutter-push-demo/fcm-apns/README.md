@@ -1,7 +1,5 @@
 # Agora Chat Push Demo flutter 
 
-[![Watch the video](https://img.youtube.com/vi/AtUhDZROifE/0.jpg)](https://www.youtube.com/watch?v=AtUhDZROifE)
-
 ## Introduction
 This repository demonstrates how to send push notifications on Android via the FCM service and directly to iOS devices using Apple Push Notification Service (APNs), without relying on the FCM service for iOS.
 
@@ -18,8 +16,10 @@ Before you begin, make sure that:
 
 ## Getting Started
 1. Clone the repository.
-2. Navigate to the project directory with `cd agora-chat-push-demo-flutter/fcm-apns`.
+2. Navigate to the project directory with `cd agora-chat-codelabs/flutter-push-demo/fcm-apns`.
 3. Initialize Firebase with `flutterfire configure`.
+  > [!TIP] 
+  > The files `android/app/google-services.json`, `firebase.json`, `ios/Runner/GoogleService-Info.plist` and `lib/firebase_options.dart` will be generated.
 4. Update `lib/consts.dart` with your Firebase and Agora Chat credentials.
 5. Install dependencies with `flutter pub get`.
 6. Run the app using `flutter run --verbose`.
