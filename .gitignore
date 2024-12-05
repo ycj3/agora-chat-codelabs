@@ -1,5 +1,6 @@
 # macOS-specific files
 .DS_Store
+.packages
 
 # VSCode settings
 .vscode/
@@ -46,11 +47,11 @@ Package.resolved
 node_modules/
 
 
+# Lockfiles
+package-lock.json
+Podfile.lock
+pubspec.lock
+yarn.lock
 
-# Flutter specific
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-.flutter-logs/
-
-
+#Flutter-specific 
+.dart_tool/
