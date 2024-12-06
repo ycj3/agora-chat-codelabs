@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:push_demo/notifications/local_notifications_manager.dart';
 import 'notifications/push_manager.dart';
 import 'page/login_page.dart';
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:logging/logging.dart';
+import 'package:flutter/services.dart';
 
 final Logger _logger = Logger('LoginPageLogger');
 
@@ -46,7 +49,19 @@ class Application extends StatefulWidget {
   State<Application> createState() => _ApplicationState();
 }
 
-class _ApplicationState extends State<Application> {
+class _ApplicationState extends State<Application> with WidgetsBindingObserver {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   List<String> members = ["demo_user_2", "demo_user_3"];
   int expiry = 1000;
@@ -159,5 +174,58 @@ class _ApplicationState extends State<Application> {
       ),
       body: const LoginPage(),
     );
+  }
+
+@override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.inactive:
+        _logger.info("App is inactive");
+        break;
+      case AppLifecycleState.paused:
+        _logger.info("App is paused");
+        // Save state, release resources
+        break;
+      case AppLifecycleState.resumed:
+        _logger.info("App is resumed");
+        if (Platform.isIOS) {
+          NativeCodeInvoker.invokeNativeCodeAppWillEnterForeground();
+        }
+        // Reinitialize resources
+        break;
+      case AppLifecycleState.detached:
+        _logger.info("App is detached");
+        // Clean up before termination
+        break;
+      case AppLifecycleState.hidden:
+        _logger.info("App is Hidden");
+        if (Platform.isIOS) {
+          NativeCodeInvoker.invokeNativeCodeAppDidEnterBackground();
+        }
+        // Clean up before termination
+        break;
+    }
+  }
+}
+
+class NativeCodeInvoker {
+  static const MethodChannel _channel = MethodChannel('com.example/native');
+
+  static Future<String> invokeNativeCodeAppWillEnterForeground() async {
+    try {
+      final String result = await _channel.invokeMethod('applicationWillEnterForeground');
+      return result;
+    } catch (e) {
+      return 'Error: $e';
+    }
+  }
+
+  static Future<String> invokeNativeCodeAppDidEnterBackground() async {
+    try {
+      final String result = await _channel.invokeMethod('applicationDidEnterBackground');
+      return result;
+    } catch (e) {
+      return 'Error: $e';
+    }
   }
 }

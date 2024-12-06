@@ -13,7 +13,6 @@
 		42F6544A9157C9CD75904D18 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7203CDC94526717B86CD3111 /* Pods_Runner.framework */; };
 		5D5484942CC22593000A58CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5484932CC22593000A58CF /* NotificationService.swift */; };
 		5D5484982CC22593000A58CF /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5D5484912CC22593000A58CF /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5DE028762D004C6C00B88E07 /* FlutterAppDelegate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE028752D004C6C00B88E07 /* FlutterAppDelegate+Category.m */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		7EE16277343CF770FE5BACE3 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE0D11C08EBECB24D78E60A /* Pods_RunnerTests.framework */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
@@ -75,8 +74,6 @@
 		5D5484932CC22593000A58CF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5D5484952CC22593000A58CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D67221F2C32840E00C35BE7 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
-		5DE028742D004C6500B88E07 /* FlutterAppDelegate+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlutterAppDelegate+Category.h"; sourceTree = "<group>"; };
-		5DE028752D004C6C00B88E07 /* FlutterAppDelegate+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FlutterAppDelegate+Category.m"; sourceTree = "<group>"; };
 		7203CDC94526717B86CD3111 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -194,8 +191,6 @@
 				97C147021CF9000F007C117D /* Info.plist */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
-				5DE028742D004C6500B88E07 /* FlutterAppDelegate+Category.h */,
-				5DE028752D004C6C00B88E07 /* FlutterAppDelegate+Category.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 			);
@@ -487,7 +482,6 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
-				5DE028762D004C6C00B88E07 /* FlutterAppDelegate+Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
