@@ -89,6 +89,13 @@ function App() {
       // Occurs when a text message is received.
       onTextMessage: (message) => {
         addLog(`${message.from}: ${message.msg}`);
+        let option = {
+          chatType: "singleChat", // The chat type: singleChat for one-to-one chat.
+          type: "channel", // The type of read receipt: channel indicates the conversation read receipt.
+          to: message.from, // The user ID of the message receipt.
+        };
+        let msg = AC.message.create(option);
+        chatClient.current.send(msg);        
       },
       // Occurs when the token is about to expire.
       onTokenWillExpire: () => {
@@ -102,6 +109,61 @@ function App() {
         addLog(`on error: ${error.message}`);
       },
     });
+
+    chatClient.current.addEventHandler("ChatroomEvent", {
+      onChatroomEvent: function(msg){
+        switch(msg.operation){
+             // Occurs when all the chat room members are unmuted.
+            case 'unmuteAllMembers':
+                break;
+            // Occurs when all the chat room members are muted.
+            case 'muteAllMembers':
+                break;
+            // Occurs when a member is removed from the chat room allow list.
+            case 'removeAllowlistMember':
+                break;
+            // Occurs when a member is added to the chat room allow list.
+            case 'addUserToAllowlist':
+                break;
+            // Occurs when a member deletes a chat room announcement.
+            case 'deleteAnnouncement':
+                break;
+            // Occurs when a member updates a chat room announcement.
+            case 'updateAnnouncement':
+                break;
+            // Occurs when a member is removed from the chat room mute list.
+            case 'unmuteMember':
+                break;
+            // Occurs when a member is added to the chat room mute list.
+            case 'muteMember':
+                break;
+            // Occurs when a chat room admin is removed from the admin list.
+            case 'removeAdmin':
+                break;
+            // Occurs when a chat room member is added to the admin list.
+            case 'setAdmin':
+                break;
+            // Occurs when the chat room owner is changed.
+            case 'changeOwner':
+                break;
+            // Occurs when a chat room member leaves a chat room.
+            case 'memberAbsence':
+              addLog("memberAbsence");
+            // Occurs when a user joins a chat room.
+            case 'memberPresence':
+              addLog("memberPresence");
+            // Occurs when custom chat room attributes are set or changed.
+            case 'updateChatRoomAttributes':
+                break;
+            // Occurs when custom chat room attributes are removed.
+            case 'removeChatRoomAttributes':
+                break;
+            default:
+                break;
+        }
+      }
+    })
+    
   }, []);
 
   return (
