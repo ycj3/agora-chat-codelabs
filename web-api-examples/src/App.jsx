@@ -5,6 +5,7 @@ import AC from "agora-chat";
 import MiniCore from "agora-chat/miniCore/miniCore";
 import * as contactPlugin from "agora-chat/contact/contact";
 import * as localCachePlugin from "agora-chat/localCache/localCache";
+import * as chatroomPlugin from "agora-chat/chatroom/chatroom";
 
 
 const APP_KEY = "61717166#1069763";
@@ -24,6 +25,7 @@ function App() {
   const [logs, setLogs] = useState([]);
   const [conversationId, setConversationId] = useState("");
   const [conversationType, setConversationType] = useState("");
+  const [chatRoomId, setChatRoomId] = useState("");
 
   const handleLogin = () => {
     if (userId && token) {
@@ -122,6 +124,20 @@ function App() {
     })
     console.log(res);
   };
+
+  const handleJoinChatRoom = async () => {
+    try {
+      const options = {
+        roomId: chatRoomId,
+        message: "reason",
+      };
+      const res = await miniCore.chatroom.joinChatRoom(options);
+      console.log(res);
+    } catch (error) {
+      addLog(`Failed to join chatroom: ${error.message}`);
+    }
+  };
+
   const addLog = (log) => {
     setLogs((prevLogs) => [...prevLogs, log]);
   };
@@ -132,6 +148,8 @@ function App() {
     miniCore.usePlugin(contactPlugin, "contact");
     // Use the local storage plugin, "localCache" is a fixed value.
     miniCore.usePlugin(localCachePlugin, "localCache");
+    // Use the chatroom plugin, "chatroom" is a fixed value.
+    miniCore.usePlugin(chatroomPlugin, "chatroom");
 
     miniCore.addEventHandler(CONNECTION_MESSAGE_EVENT, {
       onConnected: () => {
@@ -166,6 +184,13 @@ function App() {
           case 'memberPresence':
             addLog("Member presence");
             break;
+          case 'removeMember':
+            addLog("Remove Member");
+            break;
+          // Occurs when a user joins a chat room.
+          case "memberPresence":
+            addLog("A user joins the chat room");
+            break;
           default:
             break;
         }
@@ -191,12 +216,21 @@ function App() {
           <InputField label="Conversation ID" value={conversationId} onChange={setConversationId} placeholder="Enter the conversation ID" />
           <InputField label="Conversation Type" value={conversationType} onChange={setConversationType} placeholder="Enter the conversation type" />
           <Button onClick={handleSendMessage} text="Send" />
+          <div>
+            <InputField
+              label="Chatroom ID"
+              value={chatRoomId}
+              onChange={setChatRoomId}
+              placeholder="Enter the chatroom ID"
+            />
+            <Button onClick={handleJoinChatRoom} text="Join Chatroom" />
+          </div>
+          <Button onClick={getLocalConversations} text="Get Local Conversations" />
+          <Button onClick={fetchConversationFromServer} text="Fetch Conversations" />
+          <Button onClick={getServerPinnedMessages} text="Get Pinned Messages" />
+          <Button onClick={checkIfUserInChatroomMuteList} text="Check if the member in Chatroom Mute List" />
         </>
       )}
-      <Button onClick={getLocalConversations} text="Get Local Conversations" />
-      <Button onClick={fetchConversationFromServer} text="Fetch Conversations" />
-      <Button onClick={getServerPinnedMessages} text="Get Pinned Messages" />
-      <Button onClick={checkIfUserInChatroomMuteList} text="Check if the member in Chatroom Mute List" />
       <h3>Operation log</h3>
       <LogDisplay logs={logs} />
     </div>
