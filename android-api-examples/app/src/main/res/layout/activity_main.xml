@@ -16,12 +16,14 @@
         android:id="@+id/usernameInput"
         android:hint="Enter username"
         android:layout_width="match_parent"
+        android:text="demo_user_1"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/passwordInput"
         android:hint="Enter password"
         android:inputType="textPassword"
+        android:text="007eJxSYGj4lvDO+UhUZxSzWtvVAIZcfuXrxivXzio53bYjcfex9mgFhpRk45Rk89REA7MUCxML02TLZCOzVPOkxBQDEwvzJGOTNRNPZTQEMjK8PX6BmZGBlYGRgZEBxOdmSEnNzY8vLU4tijcEBAAA//9B1SQe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -46,6 +48,12 @@
     <Button
         android:id="@+id/asyncFetchConversationsFromServer"
         android:text="Async Fetch Conversations From Server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/asyncFetchHistoryMessages"
+        android:text="Async Fetch History Messages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

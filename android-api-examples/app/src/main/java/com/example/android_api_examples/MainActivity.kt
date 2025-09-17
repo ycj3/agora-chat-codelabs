@@ -1,6 +1,5 @@
 package com.example.android_api_examples
 
-import android.R.attr.button
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -16,10 +15,12 @@ import com.example.android_api_examples.ui.theme.AndroidapiexamplesTheme
 import io.agora.CallBack
 import io.agora.ValueCallBack
 import io.agora.chat.ChatClient
+import io.agora.chat.ChatMessage
 import io.agora.chat.ChatOptions
 import io.agora.chat.Conversation
-import io.agora.chat.ChatManager;
 import io.agora.chat.CursorResult
+import io.agora.chat.FetchMessageOption
+
 
 class MainActivity : ComponentActivity() {
     private lateinit var usernameInput: EditText
@@ -30,6 +31,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var sendButton: Button
 
     private lateinit var asyncFetchConversationsFromServerButton: Button
+    private lateinit var asyncFetchHistoryMessagesButton: Button
 
     private fun showLog(text: String) {
         // Show a toast message
@@ -51,9 +53,10 @@ class MainActivity : ComponentActivity() {
         loginButton = findViewById(R.id.loginButton)
         sendButton = findViewById(R.id.sendButton)
         asyncFetchConversationsFromServerButton = findViewById(R.id.asyncFetchConversationsFromServer)
+        asyncFetchHistoryMessagesButton = findViewById(R.id.asyncFetchHistoryMessages)
 
         var options = ChatOptions()
-        options.appKey = "INPUT YOUR APPKEY HERE"
+        options.appKey = "61717166#1069763"
         ChatClient.getInstance().init(this, options)
         ChatClient.getInstance().setDebugMode(true)
 
@@ -113,6 +116,34 @@ class MainActivity : ComponentActivity() {
             var cursor = ""
             val conversations = mutableListOf<Conversation>()
             doAsyncFetchConversationsFromServer(limit, cursor, conversations)
+        }
+
+        asyncFetchHistoryMessagesButton.setOnClickListener {
+            val option = FetchMessageOption()
+
+            ChatClient.getInstance().chatManager().asyncFetchHistoryMessages(
+                "demo_user_5",
+                Conversation.ConversationType.Chat,
+                10,
+                "",
+                option,
+                object : ValueCallBack<CursorResult<ChatMessage>> {
+                    override fun onSuccess(value: CursorResult<ChatMessage>?) {
+                        value?.data?.let { list ->
+                            if (list.isNotEmpty()) {
+                                list.forEach { item ->
+                                    Log.d("DEBUG_TAG", "item ID = ${item.msgId}")
+                                }
+                            }
+                        }
+
+                    }
+
+                    override fun onError(error: Int, errorMsg: String?) {
+                        // 处理错误
+                    }
+                }
+            )
         }
     }
 
